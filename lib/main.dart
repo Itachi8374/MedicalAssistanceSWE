@@ -5,6 +5,7 @@ import 'package:medical_app/data_stores/user_data.dart';
 import 'package:medical_app/firebase_options.dart';
 import 'package:medical_app/ui/home_screen.dart';
 import 'package:medical_app/ui/login.dart';
+import 'package:medical_app/ui/register.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -31,7 +32,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: "Medical Assistance App",
           home: const AuthWrapper(),
-          routes: {},
+          routes: {
+            Register.routeName: (context)=>const Register(),
+          },
         ));
   }
 }

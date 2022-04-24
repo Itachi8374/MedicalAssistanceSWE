@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:medical_app/data_stores/user_data.dart';
-import 'package:medical_app/ui/register.dart';
 import 'package:medical_app/ui/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
 
-class LoginScreen extends StatefulWidget {
-  static String routeName = '/login-email-password';
-  const LoginScreen({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  static String routeName = '/register';
+  const Register({Key? key}) : super(key: key);
 
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterState createState() => _RegisterState();
 }
 
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterState extends State<Register> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
 
-  void loginUser() {
-    context.read<UserData>().loginWithEmail(
+  void signUpUser() async {
+    await context.read<UserData>().signUpWithEmail(
       email: emailController.text,
       password: passwordController.text,
     );
+    await context.read<UserData>().loginWithEmail(email: emailController.text, password: passwordController.text);
+    Navigator.pop(context);
   }
 
 
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Login",
+            "Sign Up",
             style: TextStyle(fontSize: 30),
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.08),
@@ -56,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 40),
           ElevatedButton(
-            onPressed: loginUser,
+            onPressed: signUpUser,
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blue),
               textStyle: MaterialStateProperty.all(
@@ -67,28 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             child: const Text(
-              "Login",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
-          const SizedBox(height: 10,),
-          const Padding(
-            padding:  EdgeInsets.all(15.0),
-            child:  Text("Don't have an account? Click on the button below to register as Patient/Doctor",textAlign: TextAlign.center,),
-          ),
-          ElevatedButton(
-            onPressed: ()=>Navigator.pushNamed(context, Register.routeName),
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.blue),
-              textStyle: MaterialStateProperty.all(
-                const TextStyle(color: Colors.white),
-              ),
-              minimumSize: MaterialStateProperty.all(
-                Size(MediaQuery.of(context).size.width / 2.5, 50),
-              ),
-            ),
-            child: const Text(
-              "Register",
+              "Sign Up",
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
