@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -58,6 +59,11 @@ class UserData {
     } on FirebaseAuthException catch (e) {
       print(e.message!); // Displaying the error message
     }
+  }
+
+  Future<void> addUser(String userID,String fullName, String type) async {
+    CollectionReference users = FirebaseFirestore.instance.collection('UserData');
+    await users.doc(userID).set({"UserType":type,"Name":fullName});
   }
 
 }
