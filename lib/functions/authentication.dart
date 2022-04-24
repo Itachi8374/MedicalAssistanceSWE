@@ -1,20 +1,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<void> login({
-  required String email,
-  required String password,
-}) async {
-  try {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-  } on FirebaseAuthException catch (e) {
-    print(e.message!); // Displaying the error message
-  }
-}
-
 // EMAIL SIGN UP
   Future<void> signUpWithEmail({
     required String email,
@@ -48,5 +34,16 @@ Future<void> login({
       );
     } on FirebaseAuthException catch (e) {
       print(e.message!); // Displaying the error message
+    }
+  }
+
+  //FORGOT  PASSWORD
+  Future <void> forgotPassword({
+    required String email
+  })async{
+    try{
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch(e) {
+      print(e.message!); //Displaying the error message
     }
   }
