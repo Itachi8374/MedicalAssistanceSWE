@@ -51,4 +51,57 @@ class DoctorData {
     }
     return result;
   }
+
+  Future<List<Doctor>> searchDoctorBySymptom(String searchSymptom) async {
+    List<Doctor> result = []; // Variable to store final result
+    // Check if search String is of valid length and type
+    // Else raise an Exception
+    if (searchSymptom.length < 5 || searchSymptom.length > 20) {
+      throw Exception("Search string length not between 5 to 20");
+    } else if (!isAlpha(searchSymptom)) {
+      throw Exception("Search string is not completely alphabetic");
+    }
+    // Get all doctors from Doctor Data store
+    List<Doctor> allDoctorsAvailable = await getAllDoctors;
+    // Filter out all doctors based on those who have symptom matching search string
+    for (int index = 0; index < allDoctorsAvailable.length; index++) {
+      // Check if search string is a substring of any doctor's symptom
+      // Convert both doctor name and search string to lowercase for case insensitivity
+      if (allDoctorsAvailable[index]
+          .symptom
+          .toLowerCase()
+          .contains(searchSymptom.toLowerCase())) {
+        // If match found, add to result list
+        result.add(allDoctorsAvailable[index]);
+      }
+    }
+    return result;
+  }
+
+  Future<List<Doctor>> searchDoctorBySpeciality(String searchSpeciality) async {
+    List<Doctor> result = []; // Variable to store final result
+    // Check if search String is of valid length and type
+    // Else raise an Exception
+    if (searchSpeciality.length < 5 || searchSpeciality.length > 20) {
+      throw Exception("Search string length not between 5 to 20");
+    } else if (!isAlpha(searchSpeciality)) {
+      throw Exception("Search string is not completely alphabetic");
+    }
+    // Get all doctors from Doctor Data store
+    List<Doctor> allDoctorsAvailable = await getAllDoctors;
+    // Filter out all doctors based on those who have speciality matching search string
+    for (int index = 0; index < allDoctorsAvailable.length; index++) {
+      // Check if search string is a substring of any doctor's speciality
+      // Convert both doctor name and search string to lowercase for case insensitivity
+      if (allDoctorsAvailable[index]
+          .speciality
+          .toLowerCase()
+          .contains(searchSpeciality.toLowerCase())) {
+        // If match found, add to result list
+        result.add(allDoctorsAvailable[index]);
+      }
+    }
+    return result;
+  }
+  
 }
