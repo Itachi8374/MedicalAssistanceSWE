@@ -9,6 +9,9 @@ class UserData {
 
   User get user => _auth.currentUser!;
 
+  String fullName = "";
+  String type = "";
+
 
   // STATE PERSISTENCE STREAM
   Stream<User?> get authState => FirebaseAuth.instance.authStateChanges();
@@ -68,7 +71,12 @@ class UserData {
 
   Future<String> get userType async {
     String userID = _auth.currentUser!.uid;
-    CollectionReference userData = FirebaseFirestore.instance.collection('UserData').get(userID);
+    var docRef = await FirebaseFirestore.instance.collection('UserData').doc(userID).get();
+    var userType = docRef.data()!["UserType"];
+    this.type = userType;
+    this.fullName = docRef.data()!["Name"];
+    print("Name is ${FirebaseAuth.instance.currentUser!.uid}");
+    return userType;
   }
 
 }
