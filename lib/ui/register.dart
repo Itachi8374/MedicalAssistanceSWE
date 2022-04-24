@@ -17,7 +17,8 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  final TextEditingController nameController = TextEditingController();
+  String? userType;
 
   void signUpUser() async {
     await context.read<UserData>().signUpWithEmail(
@@ -43,6 +44,14 @@ class _RegisterState extends State<Register> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
             child: CustomTextField(
+              controller: nameController,
+              hintText: 'Enter your name',
+            ),
+          ),
+          const SizedBox(height: 20),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            child: CustomTextField(
               controller: emailController,
               hintText: 'Enter your email',
             ),
@@ -54,6 +63,22 @@ class _RegisterState extends State<Register> {
               controller: passwordController,
               hintText: 'Enter your password',
             ),
+          ),
+          const SizedBox(height: 20,),
+          DropdownButton<String>(
+            value: userType,
+            hint: const Text("Are you a doctor or patient?"),
+            items: <String>['Doctor', 'Patient'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (type) {
+              setState(() {
+                userType = type;
+              });
+            },
           ),
           const SizedBox(height: 40),
           ElevatedButton(
