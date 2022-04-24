@@ -28,8 +28,9 @@ class _RegisterState extends State<Register> {
       password: passwordController.text,
     );
     await context.read<UserData>().loginWithEmail(email: emailController.text, password: passwordController.text);
-    String userID = await context.read<User?>()!.uid;
-    UserData(FirebaseAuth.instance).addUser(userID, nameController.text, userType!);
+    String userID =  context.read<User?>()!.uid;
+    print("USER ID = $userID");
+    context.read<UserData>().addUser(userID, nameController.text, userType!);
     if (userType == "Doctor"){
       DoctorData().addDoctor(userID, nameController.text);
     }
