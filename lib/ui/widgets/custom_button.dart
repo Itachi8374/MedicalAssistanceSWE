@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
@@ -9,7 +8,6 @@ class CustomButton extends StatelessWidget {
   }) : super(key: key);
   final String text;
   final VoidCallback onTap;
-
 
   @override
   Widget build(BuildContext context) {

@@ -10,29 +10,39 @@ class PatientHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: context.read<UserData>().userType,
-      builder:(context,snapshot) {
-        if (snapshot.hasData) {
+        future: context.read<UserData>().userType,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+                body: SafeArea(
+                    child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Hello ${context.read<UserData>().fullName}",
+                  style: TextStyle(fontSize: 20),
+                ),
+                Center(
+                  child: Container(
+                    width: 300,
+                    child: CustomButton(onTap: () {}, text: "Search Doctor"),
+                  ),
+                ),
+                Center(
+                    child: Container(
+                        width: 300,
+                        child: CustomButton(
+                            onTap: () {}, text: "Search by Name"))),
+                CustomButton(onTap: () {}, text: "Search by Speciality"),
+                CustomButton(onTap: () {}, text: "Search by Symptoms")
+              ],
+            )));
+          }
           return Scaffold(
-              body: SafeArea(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text("Hello ${context.read<UserData>().fullName}",style: TextStyle(fontSize: 20),),
-                      Center(
-                        child: Container(
-                          width: 300,
-                          child: CustomButton(onTap: (){}, text: "Search Doctor"),
-                        ),
-                      ),
-                      Center(child: Container(width:300,child: CustomButton(onTap: (){}, text: "Search by Name"))),
-                      CustomButton(onTap: (){}, text: "Search by Speciality"),
-                      CustomButton(onTap: (){}, text: "Search by Symptoms")
-                    ],
-                  )));
-        }
-        return Scaffold(body: Center(child: CircularProgressIndicator(),),);
-      }
-    );
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        });
   }
 }

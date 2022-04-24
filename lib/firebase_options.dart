@@ -53,7 +53,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '672260409700',
     projectId: 'medical-assistant-82bb2',
     storageBucket: 'medical-assistant-82bb2.appspot.com',
-    iosClientId: '672260409700-b2f5q1a2jnuhrudf8pvvo7nmtm11r8mv.apps.googleusercontent.com',
+    iosClientId:
+        '672260409700-b2f5q1a2jnuhrudf8pvvo7nmtm11r8mv.apps.googleusercontent.com',
     iosBundleId: 'com.example.medicalApp',
   );
 }

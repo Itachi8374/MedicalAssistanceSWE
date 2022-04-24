@@ -7,10 +7,8 @@ import 'package:medical_app/ui/patient_home.dart';
 import 'package:medical_app/ui/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +23,11 @@ class HomeScreen extends StatelessWidget {
             return PatientHome();
           }
         }
-        return Scaffold(body: Center(
-          child: CircularProgressIndicator(),
-        ),);
+        return Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
       },
     );
   }

@@ -5,16 +5,13 @@ import 'package:medical_app/data_stores/user_data.dart';
 import 'package:medical_app/ui/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
-
 class Register extends StatefulWidget {
   static String routeName = '/register';
   const Register({Key? key}) : super(key: key);
 
-
   @override
   _RegisterState createState() => _RegisterState();
 }
-
 
 class _RegisterState extends State<Register> {
   final TextEditingController emailController = TextEditingController();
@@ -24,19 +21,19 @@ class _RegisterState extends State<Register> {
 
   void signUpUser() async {
     await context.read<UserData>().signUpWithEmail(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-    await context.read<UserData>().loginWithEmail(email: emailController.text, password: passwordController.text);
-    String userID =  context.read<User?>()!.uid;
+          email: emailController.text,
+          password: passwordController.text,
+        );
+    await context.read<UserData>().loginWithEmail(
+        email: emailController.text, password: passwordController.text);
+    String userID = context.read<User?>()!.uid;
     print("USER ID = $userID");
     context.read<UserData>().addUser(userID, nameController.text, userType!);
-    if (userType == "Doctor"){
+    if (userType == "Doctor") {
       DoctorData().addDoctor(userID, nameController.text);
     }
     Navigator.pop(context);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +69,9 @@ class _RegisterState extends State<Register> {
               hintText: 'Enter your password',
             ),
           ),
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           DropdownButton<String>(
             value: userType,
             hint: const Text("Are you a doctor or patient?"),

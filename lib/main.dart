@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           title: "Medical Assistance App",
           home: const AuthWrapper(),
           routes: {
-            Register.routeName: (context)=>const Register(),
+            Register.routeName: (context) => const Register(),
           },
         ));
   }

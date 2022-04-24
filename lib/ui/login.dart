@@ -4,29 +4,24 @@ import 'package:medical_app/ui/register.dart';
 import 'package:medical_app/ui/widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
 
-
 class LoginScreen extends StatefulWidget {
   static String routeName = '/login-email-password';
   const LoginScreen({Key? key}) : super(key: key);
-
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-
   void loginUser() {
     context.read<UserData>().loginWithEmail(
-      email: emailController.text,
-      password: passwordController.text,
-    );
+          email: emailController.text,
+          password: passwordController.text,
+        );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,13 +66,18 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           const Padding(
-            padding:  EdgeInsets.all(15.0),
-            child:  Text("Don't have an account? Click on the button below to register as Patient/Doctor",textAlign: TextAlign.center,),
+            padding: EdgeInsets.all(15.0),
+            child: Text(
+              "Don't have an account? Click on the button below to register as Patient/Doctor",
+              textAlign: TextAlign.center,
+            ),
           ),
           ElevatedButton(
-            onPressed: ()=>Navigator.pushNamed(context, Register.routeName),
+            onPressed: () => Navigator.pushNamed(context, Register.routeName),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blue),
               textStyle: MaterialStateProperty.all(
