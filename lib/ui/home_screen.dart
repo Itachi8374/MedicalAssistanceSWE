@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medical_app/data_stores/doctor_data.dart';
 import 'package:medical_app/data_stores/user_data.dart';
 import 'package:medical_app/ui/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.read<UserData>().user;
-
 
     return Scaffold(
       body: Column(

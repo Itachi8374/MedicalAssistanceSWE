@@ -66,4 +66,9 @@ class UserData {
     await users.doc(userID).set({"UserType":type,"Name":fullName});
   }
 
+  Future<String> get userType async {
+    String userID = _auth.currentUser!.uid;
+    CollectionReference userData = FirebaseFirestore.instance.collection('UserData').get(userID);
+  }
+
 }
