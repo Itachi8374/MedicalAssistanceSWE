@@ -7,14 +7,19 @@ import 'package:medical_app/ui/patient_home.dart';
 import 'package:medical_app/ui/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.read<UserData>().user;
     return FutureBuilder(
-      future: UserData(FirebaseAuth.instance).userType,
+      future: context.read<UserData>().userType,
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data == "Doctor") {

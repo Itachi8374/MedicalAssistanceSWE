@@ -6,6 +6,7 @@ import 'package:medical_app/firebase_options.dart';
 import 'package:medical_app/ui/home_screen.dart';
 import 'package:medical_app/ui/login.dart';
 import 'package:medical_app/ui/register.dart';
+import 'package:medical_app/ui/search_doctor/search_by_name.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -34,14 +35,20 @@ class MyApp extends StatelessWidget {
           home: const AuthWrapper(),
           routes: {
             Register.routeName: (context) => const Register(),
+            SearchByName.routeName: (context) => const SearchByName()
           },
         ));
   }
 }
 
-class AuthWrapper extends StatelessWidget {
+class AuthWrapper extends StatefulWidget {
   const AuthWrapper({Key? key}) : super(key: key);
 
+  @override
+  State<AuthWrapper> createState() => _AuthWrapperState();
+}
+
+class _AuthWrapperState extends State<AuthWrapper> {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User?>();

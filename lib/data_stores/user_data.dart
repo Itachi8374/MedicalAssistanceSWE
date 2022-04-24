@@ -77,4 +77,10 @@ class UserData {
     print("Name is ${FirebaseAuth.instance.currentUser!.uid}");
     return userType;
   }
+
+  Future<String> getPatientNameFromID(String id) async {
+    var docRef =
+        await FirebaseFirestore.instance.collection("UserData").doc(id).get();
+    return docRef.data()!["Name"];
+  }
 }

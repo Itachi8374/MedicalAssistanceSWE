@@ -5,10 +5,12 @@ import 'package:medical_app/models/doctor_model.dart';
 import 'package:string_validator/string_validator.dart';
 
 class DoctorData {
-  Future<void> addDoctor(String doctorID, String doctorName) async {
+  Future<void> addDoctor(String doctorID, String doctorName, String speciality,
+      String symptoms) async {
     CollectionReference doctorData =
         FirebaseFirestore.instance.collection('DoctorData');
-    await doctorData.doc(doctorID).set({"Name": doctorName});
+    await doctorData.doc(doctorID).set(
+        {"Name": doctorName, "Speciality": speciality, "Symptoms": symptoms});
   }
 
   Future<List<Doctor>> get getAllDoctors async {
@@ -20,7 +22,13 @@ class DoctorData {
     for (int i = 0; i < doctorDocs.length; i++) {
       String doctorName = doctorDocs[i]["Name"];
       String doctorID = doctorDocs[i].id;
-      Doctor doctorInstance = Doctor(fullName: doctorName, userId: doctorID);
+      String speciality = doctorDocs[i]["Speciality"];
+      String symptom = doctorDocs[i]["Symptoms"];
+      Doctor doctorInstance = Doctor(
+          fullName: doctorName,
+          userId: doctorID,
+          speciality: speciality,
+          symptom: symptom);
       allDocs.add(doctorInstance);
     }
     return allDocs;
@@ -30,10 +38,11 @@ class DoctorData {
     List<Doctor> result = []; // Variable to store final result
     // Check if search String is of valid length and type
     // Else raise an Exception
-    if (searchName.length < 5 || searchName.length > 20) {
-      throw Exception("Search string length not between 5 to 20");
-    } else if (!isAlpha(searchName)) {
-      throw Exception("Search string is not completely alphabetic");
+    if (searchName.length < 5 ||
+        searchName.length > 20 ||
+        !isAlpha(searchName)) {
+      throw Exception(
+          "Search string is not valid"); // Exit by throwing exception
     }
     // Get all doctors from Doctor Data store
     List<Doctor> allDoctorsAvailable = await getAllDoctors;
@@ -103,5 +112,4 @@ class DoctorData {
     }
     return result;
   }
-  
 }
